@@ -5,15 +5,105 @@
 }
 body {
   background-color: #f3fcff;
+  margin: 0;
+  padding: 0;
 }
-.expense-container {
+
+/* Authentication Styling */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #eef2ff;
+}
+.auth-box {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Layout for Sidebar and Expense Container */
+.layout-container {
+  display: flex;
+  max-width: 1000px;
+  margin: 40px auto;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.sidebar {
+  width: 250px;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
-  margin-top: 50px;
+  height: fit-content;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 2px solid #eef2ff;
+  padding-bottom: 10px;
+}
+
+.month-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.month-list li {
+  padding: 15px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 6px;
+}
+
+.month-list li:hover {
+  background-color: #f3fcff;
+}
+
+.month-list li.active-month {
+  background-color: #6466f1;
+  color: white;
+}
+
+.month-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.month-savings {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.month-list li.active-month .month-savings {
+  color: #fff !important;
+}
+
+.month-savings.income {
+  color: #02c002;
+}
+
+.month-savings.expense {
+  color: #dc0202;
+}
+
+
+/* Existing Expense Container Styles */
+.expense-container {
+  flex: 1;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .expense-item {
@@ -53,21 +143,28 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 input {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 16px;
 }
 button {
-  padding: 10px;
+  padding: 12px;
   border-radius: 5px;
   border: none;
   background-color: #6466f1;
   color: #fff;
   cursor: pointer;
   width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+button:hover {
+  background-color: #4f51d8;
 }
 
 .balance-container {
@@ -76,6 +173,7 @@ button {
   padding: 20px;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 20px;
 }
 
 .currency-item {
@@ -109,11 +207,15 @@ button {
 
 .error {
   color: #dc0202;
-  font-size: 12px;
-  margin-bottom: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: #ffeaea;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.delete-button-overlay {
+.delete-button-overlay, .Edit-button-overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -127,41 +229,31 @@ button {
   transition: all 0.3s ease-in-out;
   transform: translateX(10%);
 }
-.delete-button-overlay button {
+.delete-button-overlay button, .Edit-button-overlay button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: 100px;
   background-color: #f14848;
   color: #fff;
+  margin: 0 5px;
 }
 
-.Edit-button-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.173);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  transform: translateX(10%);
-}
-.Edit-button-overlay button {
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100px;
-  background-color: #f14848;
-  color: #fff;
-}
 .expense-item {
   position: relative;
+  overflow: hidden;
 }
-.expense-item:hover .delete-button-overlay {
+.expense-item:hover .delete-button-overlay,
+.expense-item:hover .Edit-button-overlay {
   opacity: 1;
   transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: auto;
+  }
 }

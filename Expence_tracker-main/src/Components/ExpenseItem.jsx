@@ -8,7 +8,11 @@ function ExpenseItem(props) {
     }
  
   function handleEdit(){
-      props.editExpense(props.expense);
+      const newTitle = prompt("Enter new title", title);
+      const newAmount = prompt("Enter new amount", amount);
+      if(newTitle && newAmount) {
+          props.editExpense(newTitle, newAmount, _id);
+      }
   }
 
   return (
