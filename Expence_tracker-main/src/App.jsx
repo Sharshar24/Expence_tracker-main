@@ -1,9 +1,9 @@
+import React, { useState, useEffect } from "react"
 import ExpenseContainer from "./Components/ExpenseContainer"
 import {BrowserRouter,Routes,Route,Link,Navigate} from 'react-router-dom'
 import Home from './Home'
 import Post from './Post.jsx'
 import AuthPage from './AuthPage'
-import { useState, useEffect } from "react"
 
 function App(){
   const [user, setUser] = useState(localStorage.getItem('currentUser'));
