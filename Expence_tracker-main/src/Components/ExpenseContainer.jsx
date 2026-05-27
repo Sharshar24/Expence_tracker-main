@@ -13,8 +13,11 @@ function ExpenseContainer({ user }) {
     if (user) {
       fetch(`http://localhost:4000/expense/${user}`)
         .then(res => res.json())
-        .then(data => setExpense(data))
-        .catch(err => console.error("Error fetching expenses:", err));
+        .then(data => setExpense(Array.isArray(data) ? data : []))
+        .catch(err => {
+          console.error("Error fetching expenses:", err);
+          setExpense([]);
+        });
     }
   }, [user]);
 
